@@ -202,8 +202,6 @@ export const RobotICTGenerator = () => {
               )}
             </div>
 
-
-
             {/* Dělitelé */}
             <h2 className="text-lg font-semibold text-gray-800 mb-4">
               Dělitelé
@@ -273,7 +271,6 @@ export const RobotICTGenerator = () => {
                 />
               </div>
             </div>
-
 
             {error && (
               <p className="text-red-500 text-sm mt-2">{error}</p>
