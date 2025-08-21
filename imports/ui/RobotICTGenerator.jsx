@@ -218,7 +218,6 @@ export const RobotICTGenerator = () => {
                   value={divisor1}
                   onChange={handleDivisor1Change}
                   min="1"
-                  max="20"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   placeholder="Např. 3"
                 />
@@ -232,7 +231,6 @@ export const RobotICTGenerator = () => {
                   value={divisor2}
                   onChange={handleDivisor2Change}
                   min="1"
-                  max="20"
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors"
                   placeholder="Např. 5"
                 />
