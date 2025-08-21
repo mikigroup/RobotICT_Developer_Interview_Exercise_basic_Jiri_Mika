@@ -30,11 +30,6 @@ Modern web application for number validation based on divisibility rules with ad
    - Application will be available at `http://localhost:3000`
    - If port 3000 is occupied, Meteor will automatically use the next available port
 
-### Alternative run on different port
-```bash
-meteor run --port 3001
-```
-
 ## 📋 Implementation explanation
 
 ### Application architecture
@@ -55,9 +50,8 @@ The application is built on **Meteor.js** framework with **React** components an
 │   └── utils/
 │       └── numberGenerator.js     # Number generation logic
 ├── server/
-│   └── main.js           # Server-side code
-└── tests/
-    └── main.js           # Tests
+   └── main.js           # Server-side code
+
 ```
 
 ### Configuration and application state
