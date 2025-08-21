@@ -1,10 +1,10 @@
 export const generateNumberSequence = (min, max) => {
-  // Validace vstupů
+  // Input validation
   if (min > max) {
-    throw new Error("Minimální hodnota nemůže být větší než maximální hodnota");
+    throw new Error("Minimum value cannot be greater than maximum value");
   }
   
-  // Generování sekvence
+  // Generate sequence
   return Array.from(
     { length: max - min + 1 }, 
     (_, index) => min + index

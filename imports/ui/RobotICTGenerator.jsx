@@ -2,35 +2,35 @@ import React, { useState, useEffect } from "react";
 import { generateNumberSequence, getNumberText } from "../utils/numberGenerator.js";
 
 export const RobotICTGenerator = () => {
-  // Stav pro zadané číslo
+  // State for input number
   const [inputNumber, setInputNumber] = useState(15);
 
-  // Stav pro rozsah čísel
+  // State for number range
   const [minRange, setMinRange] = useState(1);
   const [maxRange, setMaxRange] = useState(100);
 
-  // Stav pro dělitele
+  // State for divisors
   const [divisor1, setDivisor1] = useState(3);
   const [divisor2, setDivisor2] = useState(5);
 
-  // Stav pro chybu
+  // State for error
   const [error, setError] = useState("");
 
-  // Stav pro vygenerovaná čísla v rozsahu
+  // State for generated numbers in range
   const [rangeNumbers, setRangeNumbers] = useState([]);
 
-    // Generování čísel v rozsahu při změně rozsahu
+  // Generate numbers in range when range changes
   useEffect(() => {
     try {
       setError("");
-      
-      // Validace rozsahu
+
+      // Range validation
       if (minRange > maxRange) {
-        setError("Minimální hodnota nemůže být větší než maximální hodnota");
+        setError("Minimum value cannot be greater than maximum value");
         setRangeNumbers([]);
         return;
       }
-      
+
       const generated = generateNumberSequence(minRange, maxRange);
       setRangeNumbers(generated);
     } catch (error) {
@@ -39,13 +39,13 @@ export const RobotICTGenerator = () => {
     }
   }, [minRange, maxRange]);
 
-  // Funkce pro zpracování změny inputu
+  // Function for handling input change
   const handleNumberChange = (e) => {
     const value = parseInt(e.target.value) || 0;
     setInputNumber(value);
   };
 
-  // Funkce pro změnu rozsahu
+  // Function for changing range
   const handleMinRangeChange = (e) => {
     const value = parseInt(e.target.value) || 1;
     setMinRange(value);
@@ -56,7 +56,7 @@ export const RobotICTGenerator = () => {
     setMaxRange(value);
   };
 
-  // Funkce pro změnu dělitelů
+  // Function for changing divisors
   const handleDivisor1Change = (e) => {
     const value = parseInt(e.target.value) || 1;
     setDivisor1(value);
@@ -67,9 +67,9 @@ export const RobotICTGenerator = () => {
     setDivisor2(value);
   };
 
-  // Funkce pro stahování souborů
+  // Function for downloading files
   const downloadAsTxt = () => {
-    // Výpočet statistik
+    // Calculate statistics
     const stats = {
       robot: 0,
       ict: 0,
@@ -85,24 +85,24 @@ export const RobotICTGenerator = () => {
       else stats.plain++;
     });
 
-    const header = `RobotICT Validator - Rozsah ${minRange}-${maxRange}\n`;
-    const header2 = `Dělitelé: ${divisor1} a ${divisor2}\n`;
-    const separator = '='.repeat(50) + '\n\n';
+    const header = `RobotICT Validator - Range ${minRange}-${maxRange}\n`;
+    const header2 = `Divisors: ${divisor1} and ${divisor2}\n`;
+    const separator = "=".repeat(50) + "\n\n";
 
-    const statistics = `STATISTIKY:\n`;
-    const statsContent = `Robot: ${stats.robot}\nICT: ${stats.ict}\nRobotICT: ${stats.robotICT}\nČísla: ${stats.plain}\n\n`;
+    const statistics = `STATISTICS:\n`;
+    const statsContent = `Robot: ${stats.robot}\nICT: ${stats.ict}\nRobotICT: ${stats.robotICT}\nNumbers: ${stats.plain}\n\n`;
 
-    const listHeader = `SEZNAM ČÍSEL:\n`;
+    const listHeader = `NUMBER LIST:\n`;
     const content = rangeNumbers.map(num => {
       const text = getNumberText(num, divisor1, divisor2);
       return `${num}: ${text}`;
-    }).join('\n');
+    }).join("\n");
 
     const fullContent = header + header2 + separator + statistics + statsContent + listHeader + content;
 
-    const blob = new Blob([fullContent], { type: 'text/plain' });
+    const blob = new Blob([fullContent], { type: "text/plain" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `robotict_numbers_${minRange}-${maxRange}.txt`;
     document.body.appendChild(a);
@@ -112,7 +112,7 @@ export const RobotICTGenerator = () => {
   };
 
   const downloadAsCsv = () => {
-    // Výpočet statistik
+    // Calculate statistics
     const stats = {
       robot: 0,
       ict: 0,
@@ -130,32 +130,32 @@ export const RobotICTGenerator = () => {
 
     // Metadata
     const metadata = [
-      `RobotICT Validator - Rozsah ${minRange}-${maxRange}`,
-      `Dělitelé: ${divisor1} a ${divisor2}`,
-      '',
-      'STATISTIKY',
+      `RobotICT Validator - Range ${minRange}-${maxRange}`,
+      `Divisors: ${divisor1} and ${divisor2}`,
+      "",
+      "STATISTICS",
       `Robot,${stats.robot}`,
       `ICT,${stats.ict}`,
       `RobotICT,${stats.robotICT}`,
-      `Čísla,${stats.plain}`,
-      '',
-      'SEZNAM ČÍSEL'
-    ].join('\n');
+      `Numbers,${stats.plain}`,
+      "",
+      "NUMBER LIST"
+    ].join("\n");
 
-    // Hlavička pro data
-    const headers = 'Číslo,Dělitelné 3,Dělitelné 5,Dělitelné oběma,Označení\n';
+    // Header for data
+    const headers = "Number,Divisible by 3,Divisible by 5,Divisible by both,Label\n";
     const content = rangeNumbers.map(num => {
       const text = getNumberText(num, divisor1, divisor2);
-      const divisibleBy3 = num % divisor1 === 0 ? 'Ano' : 'Ne';
-      const divisibleBy5 = num % divisor2 === 0 ? 'Ano' : 'Ne';
-      const divisibleByBoth = (num % divisor1 === 0 && num % divisor2 === 0) ? 'Ano' : 'Ne';
+      const divisibleBy3 = num % divisor1 === 0 ? "Yes" : "No";
+      const divisibleBy5 = num % divisor2 === 0 ? "Yes" : "No";
+      const divisibleByBoth = (num % divisor1 === 0 && num % divisor2 === 0) ? "Yes" : "No";
       return `${num},${divisibleBy3},${divisibleBy5},${divisibleByBoth},${text}`;
-    }).join('\n');
+    }).join("\n");
 
-    const csvContent = metadata + '\n' + headers + content;
-    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const csvContent = metadata + "\n" + headers + content;
+    const blob = new Blob([csvContent], { type: "text/csv" });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
+    const a = document.createElement("a");
     a.href = url;
     a.download = `robotict_numbers_${minRange}-${maxRange}.csv`;
     document.body.appendChild(a);
