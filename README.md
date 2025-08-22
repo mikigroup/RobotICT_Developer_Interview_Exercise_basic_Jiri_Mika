@@ -12,7 +12,7 @@ Modern web application for number validation based on divisibility rules with ad
 
 1. **Clone the repository:**
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/jiri-stolni/RobotICT_Developer_Interview_Exercise_basic_Jiri_Mika.git
    cd RobotICT_Developer_Interview_Exercise_basic_Jiri_Mika
    ```
 
