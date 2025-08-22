@@ -5,7 +5,7 @@ Modern web application for number validation based on divisibility rules with ad
 ## 🚀 How to run the application locally
 
 ### Prerequisites
-- **Node.js** (version 16 or higher)
+- **Node.js** (version 22 or higher)
 - **Meteor.js** framework
 
 ### Installation and setup
